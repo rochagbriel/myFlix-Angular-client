@@ -1,0 +1,25 @@
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: #34c6bf;
+    border-bottom: 1px solid #1d6e6a;
+    .logo-nav {
+        height: 68px ;
+    }
+    button {
+        margin: 6px;
+    }
+}
+@media screen and (max-width: 550px) {
+    nav {
+        flex-direction: column;
+        .logo-nav {
+            height: 50px;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<nav>
+  <img class="logo-nav" src="../../assets/img/myflix_logo.png" />
+  <div>
+    <button mat-raised-button color="primary" (click)="toMovies()">
+      Movies
+    </button>
+    <button mat-raised-button color="primary" (click)="toProfile()">
+      Profile
+    </button>
+    <button
+      class="logout-btn"
+      mat-raised-button
+      color="warn"
+      (click)="handleLogout()"
+    >
+      Logout
+    </button>
+  </div>
+</nav>
