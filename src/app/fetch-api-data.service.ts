@@ -12,6 +12,9 @@ const apiUrl = 'https://myflix-88009.herokuapp.com/';
 
 // Exporting the FetchApiDataService so that the app can use it
 export class FetchApiDataService {
+  editUser(userData: { Username: string; Password: string; Email: string; Birthday: string; }) {
+    throw new Error('Method not implemented.');
+  }
 // Inject the HttpClient module to the constructor params
 // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {
