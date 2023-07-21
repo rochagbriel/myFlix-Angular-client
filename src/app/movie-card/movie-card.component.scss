@@ -1,0 +1,23 @@
+
+.movie-list {
+    margin-top: 10vh;
+    display: flex;
+    height: 60vh;
+    justify-items: center;
+    img {
+        width: auto;
+        height: 82%;
+        border: 1px solid #dbedec;
+    }
+    .movie-card {
+        border: 1px solid #c7e1e0;
+        margin-right: 6px;
+    }
+    .favorite-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 6px;
+        cursor: pointer;
+    }
+}
