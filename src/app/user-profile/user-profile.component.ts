@@ -24,22 +24,20 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUser();
+    this.getUserInfo();
   }
 
-  getUser(): void {
-    this.fetchApiData.getUser().subscribe((resp: any) => {
-      this.user = resp;
-      this.userData.Username = this.user.Username;
-      this.userData.Email = this.user.Email;
-      this.userData.Birthday = formatDate(this.user.Birthday, 'dd-MM-yyyy', 'en-DE', 'UTC+2');
-
-      this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-        this.favoriteMovies = resp.filter((movie: any) => this.user.FavoriteMovies.includes(movie._id));
-        return this.favoriteMovies;
-      });
-    });
+  getUserInfo(): void {
+    this.user = JSON.parse(localStorage.getItem('user')!);
+    const date = formatDate(this.user.Birthday, 'yyyy-MM-dd', 'en-US');
+    this.userData = {
+      Username: this.user.Username,
+      Password: this.user.Password,
+      Email: this.user.Email,
+      Birthday: date
+    };
   }
+
 
   editUser(): void {
     this.fetchApiData.editUserInfo(this.userData).subscribe((data) => {

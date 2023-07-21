@@ -1,28 +1,14 @@
 <app-navigation></app-navigation>
 
 <div class="profile">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>User Profile</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item>
-          <mat-icon mat-list-icon>account_circle</mat-icon>
-          <h3 mat-line>Username</h3>
-          <p mat-line>{{ user.Username }}</p>
-        </mat-list-item>
-        <mat-list-item>
-          <mat-icon mat-list-icon>email</mat-icon>
+
+          <h3>Username</h3>
+          <p>{{ userData.Username }}</p>
+
           <h3 mat-line>Email</h3>
-          <p mat-line>{{ user.Email }}</p>
-        </mat-list-item>
-        <mat-list-item>
-          <mat-icon mat-list-icon>cake</mat-icon>
+          <p mat-line>{{ userData.Email }}</p>
+
           <h3 mat-line>Birthday</h3>
-          <p mat-line>{{ user.Birthday }}</p>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+          <p mat-line>{{ userData.Birthday }}</p>
+
 </div>
