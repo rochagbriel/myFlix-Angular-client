@@ -11,8 +11,8 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  user: any = {};
 
+  user: any = {};
   favoriteMovies: any = [];
 
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
@@ -36,8 +36,12 @@ export class UserProfileComponent implements OnInit {
       Email: this.user.Email,
       Birthday: date
     };
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+    this.favoriteMovies = resp.filter((movie: any) => this.user.FavoriteMovies.includes(movie._id));
+    // console.log(this.favoriteMovies);
   }
-
+  );
+  }
 
   editUser(): void {
     this.fetchApiData.editUserInfo(this.userData).subscribe((data) => {
@@ -55,6 +59,16 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  deleteFavoriteMovie(id: string): void {
+    this.fetchApiData.deleteFavoriteMovie(id).subscribe((resp: any) => {
+      // console.log(resp);
+      this.snackBar.open('Movie removed from favorites!', 'OK', {
+        duration: 2000
+      });
+      this.getUserInfo();
+    });
+  }
+
   deleteUser(): void {
    if (confirm('Are you sure you want to delete your account?')) {
     this.router.navigate(['welcome']).then(() => {
@@ -67,6 +81,6 @@ export class UserProfileComponent implements OnInit {
       );
     });
   }
-}
+  }
 }
 

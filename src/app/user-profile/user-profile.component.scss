@@ -1,3 +1,32 @@
 .profile {
-    margin-top: 70px;
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    @media screen and (max-width: 550px) {
+        grid-template-columns: 1fr;
+        .edit-form {
+            form {
+                width: 90vw;
+            }
+        }
+    }
+    .profile-card {
+        height: 100%;
+    }
+}
+
+.edit-form {
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 40vw;
+    }
+    button {
+        margin: 0 5px;
+    }
+}
+
+.favorites-card {
+    width: 20%;
+    margin: 10px;
 }
