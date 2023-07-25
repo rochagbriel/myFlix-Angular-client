@@ -38,14 +38,11 @@ export class UserLoginFormComponent implements OnInit {
       localStorage.setItem('Username', result.user.Username);
   
       this.router.navigate(['movies']);
-      this.snackBar.open(result, 'OK', {
-        duration: 2000
-      });
+      // this.snackBar.open(result, 'OK', {
+      //   duration: 2000
+      // });
     }, (result) => {
       console.log(result);
-      this.snackBar.open(result, 'OK', {
-        duration: 2000
-      });
     });
   }
 }

@@ -3,6 +3,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InfoCardComponent } from '../info-card/info-card.component';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-movie-card',
@@ -14,6 +15,7 @@ export class MovieCardComponent {
   movies: any[] = [];
 
   constructor(
+    private userService: UserService,
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog) { }
@@ -66,22 +68,24 @@ export class MovieCardComponent {
   addFavoriteMovie(id: string): void {
     this.fetchApiData.addFavoriteMovie(id).subscribe((resp: any) => {
       console.log(resp);
-      let movie = resp.Title;
+      let movie = this.movies.find((m: any) => m._id === id).Title;
       this.snackBar.open(
-        `${movie} has been added to your favorites!`, 'OK', {
+        `"${movie}" has been added to your favorites!`, 'OK', {
         duration: 2000
       });
+      this.userService.setUser(resp);
     });
   }
 
   deleteFavoriteMovie(id: string): void {
     this.fetchApiData.deleteFavoriteMovie(id).subscribe((resp: any) => {
-      // console.log(resp);
-      let movie = resp.Title;
+      console.log(resp);
+      let movie = this.movies.find((m: any) => m._id === id).Title;
       this.snackBar.open(
-        `${movie} has been removed from your favorites!`, 'OK', {
+        `"${movie}" has been removed from your favorites!`, 'OK', {
         duration: 2000
       });
+      this.userService.setUser(resp);
     });
   }
 }
