@@ -8,17 +8,17 @@ import { UserService } from '../user.service';
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss']
+  styleUrls: ['./movie-card.component.scss'],
 })
 export class MovieCardComponent {
-
   movies: any[] = [];
 
   constructor(
     private userService: UserService,
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getMovies();
@@ -37,7 +37,7 @@ export class MovieCardComponent {
       data: {
         title: `Genre: ${name}`,
         description: description,
-      }
+      },
     });
   }
 
@@ -46,7 +46,7 @@ export class MovieCardComponent {
       data: {
         title: `Director: ${name}`,
         description: `${bio} Born: ${birth}`,
-      }
+      },
     });
   }
 
@@ -55,7 +55,7 @@ export class MovieCardComponent {
       data: {
         title: `Synopsis: "${title}"`,
         description: description,
-      }
+      },
     });
   }
 
@@ -69,9 +69,8 @@ export class MovieCardComponent {
     this.fetchApiData.addFavoriteMovie(id).subscribe((resp: any) => {
       //console.log(resp);
       let movie = this.movies.find((m: any) => m._id === id).Title;
-      this.snackBar.open(
-        `"${movie}" has been added to your favorites!`, 'OK', {
-        duration: 2000
+      this.snackBar.open(`"${movie}" has been added to your favorites!`, 'OK', {
+        duration: 2000,
       });
       this.userService.setUser(resp);
     });
@@ -82,9 +81,12 @@ export class MovieCardComponent {
       //console.log(resp);
       let movie = this.movies.find((m: any) => m._id === id).Title;
       this.snackBar.open(
-        `"${movie}" has been removed from your favorites!`, 'OK', {
-        duration: 2000
-      });
+        `"${movie}" has been removed from your favorites!`,
+        'OK',
+        {
+          duration: 2000,
+        }
+      );
       this.userService.setUser(resp);
     });
   }

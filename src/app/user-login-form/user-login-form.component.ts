@@ -10,39 +10,39 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
-  styleUrls: ['./user-login-form.component.scss']
+  styleUrls: ['./user-login-form.component.scss'],
 })
 export class UserLoginFormComponent implements OnInit {
-  
-
   @Input() userData = { Username: '', Password: '' };
-  
+
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar,
     private router: Router
-    ) { }
-    
+  ) {}
 
   ngOnInit(): void {}
   // This is the function responsible for sending the form inputs to the backend
   loginUser(): void {
-    this.fetchApiData.userLogin(this.userData).subscribe((result) => {
-      // Logic for a successful user login goes here! (To be implemented)
-      this.dialogRef.close(); // This will close the modal on success!
-      // console.log(result);
-      localStorage.setItem('user', JSON.stringify(result.user));
-      localStorage.setItem('token', result.token);
-      localStorage.setItem('userID', result.user._id);
-      localStorage.setItem('Username', result.user.Username);
-  
-      this.router.navigate(['movies']);
-      // this.snackBar.open(result, 'OK', {
-      //   duration: 2000
-      // });
-    }, (result) => {
-      // console.log(result);
-    });
+    this.fetchApiData.userLogin(this.userData).subscribe(
+      (result) => {
+        // Logic for a successful user login goes here! (To be implemented)
+        this.dialogRef.close(); // This will close the modal on success!
+        // console.log(result);
+        localStorage.setItem('user', JSON.stringify(result.user));
+        localStorage.setItem('token', result.token);
+        localStorage.setItem('userID', result.user._id);
+        localStorage.setItem('Username', result.user.Username);
+
+        this.router.navigate(['movies']);
+        // this.snackBar.open(result, 'OK', {
+        //   duration: 2000
+        // });
+      },
+      (result) => {
+        // console.log(result);
+      }
+    );
   }
 }
