@@ -1,17 +1,22 @@
 
 .movie-list {
-    margin-top: 10vh;
+    margin-top: 15vh;
     display: flex;
-    height: 60vh;
+    height: 30rem;
     justify-items: center;
     img {
-        width: auto;
-        height: 82%;
+        width: 18rem;
         border: 1px solid #dbedec;
     }
     .movie-card {
+        height: 30rem;
         border: 1px solid #c7e1e0;
         margin-right: 6px;
+    }
+    .moviecard-btns {
+        border: solid 1px #dbedec;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
     }
     .favorite-btn {
         position: absolute;

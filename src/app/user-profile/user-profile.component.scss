@@ -1,59 +1,59 @@
 .profile {
-    margin-top: 80px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    @media screen and (max-width: 550px) {
-        grid-template-columns: 1fr;
-        .edit-form {
-            form {
-                width: 90vw;
-            }
-        }
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  @media screen and (max-width: 550px) {
+    grid-template-columns: 1fr;
+    .edit-form {
+      form {
+        width: 90vw;
+      }
     }
-    .profile-card {
-        height: 100%;
-    }
+  }
+  .profile-card {
+    height: 100%;
+  }
 }
 
 .edit-form {
-    form {
-        display: flex;
-        flex-direction: column;
-        width: 40vw;
-    }
-    button {
-        margin: 0 5px;
-    }
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+  }
+  button {
+    margin: 0 5px;
+  }
 }
 
 .favorites-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    @media screen and (max-width: 830px) {
-        grid-template-columns: 1fr 1fr;
-    }
-    @media screen and (max-width: 550px) {
-        grid-template-columns: 1fr;
-    }
-    
-} .movie-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  @media screen and (max-width: 830px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (max-width: 550px) {
+    grid-template-columns: 1fr;
+  }
+}
+.movie-card {
+  width: 30vw;
+  border: 1px solid #c7e1e0;
+  margin: 6px;
+  @media screen and (max-width: 830px) {
+    width: 45vw;
+  }
+  @media screen and (max-width: 550px) {
+    width: 90vw;
+  }
+  img {
     width: 30vw;
-    border: 1px solid #c7e1e0;
-    margin: 6px;
+    border: 1px solid #dbedec;
     @media screen and (max-width: 830px) {
-        width: 45vw;
+      width: 45vw;
     }
     @media screen and (max-width: 550px) {
-        width: 90vw;
+      width: 90vw;
     }
-    img {
-        width: 30vw;
-        border: 1px solid #dbedec;
-        @media screen and (max-width: 830px) {
-            width: 45vw;
-        }
-        @media screen and (max-width: 550px) {
-            width: 90vw;
-        }
-    }
-} 
+  }
+}

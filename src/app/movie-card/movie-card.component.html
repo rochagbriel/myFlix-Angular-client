@@ -8,7 +8,7 @@
       >
     </mat-card-header>
     <img src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
-    <mat-card-actions>
+    <mat-card-actions class="moviecard-btns">
       <button
         mat-button
         color="primary"
@@ -41,6 +41,7 @@
         mat-icon-button
         (click)="addFavoriteMovie(movie._id)"
         matTolltip="Add to favorites"
+        class="favorite-btn"
       >
         <mat-icon>favorite_border</mat-icon>
       </button>
@@ -49,6 +50,7 @@
         mat-icon-button
         (click)="deleteFavoriteMovie(movie._id)"
         matTolltip="Delete from favorites"
+        class="favorite-btn"
       >
         <mat-icon>favorite</mat-icon>
       </button>
