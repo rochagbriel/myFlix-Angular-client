@@ -91,21 +91,6 @@ export class FetchApiDataService {
     );
   }
 
-  // getFavoriteMovies(): Observable<any> {
-  //   const token = localStorage.getItem('token');
-  //   const userID = localStorage.getItem('user._id');
-  //   return this.http.get(apiUrl + 'users/' + userID, {
-  //     headers: new HttpHeaders(
-  //       {
-  //         Authorization: 'Bearer ' + token,
-  //       })
-  //   }).pipe(
-  //     map(this.extractResponseData),
-  //     map((data) => data.FavoriteMovies),
-  //     catchError(this.handleError)
-  //   );
-  // }
-
 // Making the api call to add a movie to a user's list of favorites
   addFavoriteMovie(movieID: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -157,6 +142,7 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
+
 
 // Non-typed response extraction
   private extractResponseData(res: any): any {

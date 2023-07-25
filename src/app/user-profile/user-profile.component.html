@@ -1,75 +1,102 @@
 <app-navigation></app-navigation>
 <div class="profile">
-<div class="profile-info">
+  <div class="profile-info">
     <mat-card class="profile-card">
-        <mat-card-header>
-            <mat-card-title><h2>User Profile</h2></mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <h3 mat-line>Username</h3>
-          <p mat-line>{{ userData.Username }}</p>
-        
-          <h3 mat-line>Email</h3>
-          <p mat-line>{{ userData.Email }}</p>
-       
-          <h3 mat-line>Birthday</h3>
-          <p mat-line>{{ userData.Birthday }}</p>
-        </mat-card-content>
+      <mat-card-header>
+        <mat-card-title><h2>User Profile</h2></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h3 mat-line>Username</h3>
+        <p mat-line>{{ userData.Username }}</p>
+
+        <h3 mat-line>Email</h3>
+        <p mat-line>{{ userData.Email }}</p>
+
+        <h3 mat-line>Birthday</h3>
+        <p mat-line>{{ userData.Birthday }}</p>
+      </mat-card-content>
     </mat-card>
-</div>
-<div class="edit-form">
+  </div>
+  <div class="edit-form">
     <mat-card class="profile-card">
-        <mat-card-header>
-            <mat-card-title><h2>Edit your data</h2></mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <form>
-                <mat-form-field>
-                    <mat-label>Username</mat-label>
-                    <input matInput placeholder="Username" type="text" name="Username" required>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Password</mat-label>
-                    <input matInput type="password" placeholder="Password" name="Password" required>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Email</mat-label>
-                    <input matInput type="email" placeholder="Email" name="Email" required>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Birthday</mat-label>
-                    <input matInput type="date" placeholder="Birthday" name="Birthday">
-                </mat-form-field>
-                <mat-card-actions>
-                    <button mat-raised-button color="primary">Save</button>
-                    <button mat-raised-button color="warn">Delete your acount</button>
-                </mat-card-actions>
-            </form>
-        </mat-card-content>
+      <mat-card-header>
+        <mat-card-title><h2>Edit your data</h2></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form>
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input
+              matInput
+              placeholder="Username"
+              type="text"
+              name="Username"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              type="password"
+              placeholder="Password"
+              name="Password"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="email"
+              placeholder="Email"
+              name="Email"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Birthday</mat-label>
+            <input
+              matInput
+              type="date"
+              placeholder="Birthday"
+              name="Birthday"
+            />
+          </mat-form-field>
+          <mat-card-actions>
+            <button mat-raised-button color="primary">Save</button>
+            <button mat-raised-button color="warn">Delete your acount</button>
+          </mat-card-actions>
+        </form>
+      </mat-card-content>
     </mat-card>
-</div>
+  </div>
 </div>
 <div class="favorites">
-    <mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title><h2>Favorite Movies</h2></mat-card-title>
+      <mat-card-subtitle>
+        <p *ngIf="favoriteMovies.length === 0">No favorite movies yet!</p>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <div class="favorites-card">
+      <div class="movie-card" *ngFor="let movie of favoriteMovies">
         <mat-card-header>
-            <mat-card-title><h2>Favorite Movies</h2></mat-card-title>
-            <mat-card-subtitle>
-                <p *ngIf="favoriteMovies.length === 0">No favorite movies yet!</p>
-            </mat-card-subtitle>
+          <mat-card-title>{{ movie.Title }}</mat-card-title>
+          <mat-card-subtitle
+            >Directed by: {{ movie.Director.Name }}</mat-card-subtitle
+          >
         </mat-card-header>
-        <div class="favorites-card">
-            <mat-card class="movie-card" *ngFor="let movie of favoriteMovies">
-              <mat-card-header>
-                <mat-card-title>{{ movie.Title }}</mat-card-title>
-                <mat-card-subtitle
-                  >Directed by: {{ movie.Director.Name }}</mat-card-subtitle
-                >
-              </mat-card-header>
-              <img src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
-              <mat-card-actions>
-                <button mat-icon-button (click)="deleteFavoriteMovie(movie._id)">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </mat-card-actions>
-    </mat-card>
+        <img src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
+        <div>
+          <button mat-icon-button (click)="deleteFavoriteMovie(movie._id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </mat-card>
 </div>
