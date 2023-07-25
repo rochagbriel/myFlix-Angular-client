@@ -42,7 +42,7 @@ export class UserLoginFormComponent implements OnInit {
       //   duration: 2000
       // });
     }, (result) => {
-      console.log(result);
+      // console.log(result);
     });
   }
 }

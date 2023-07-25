@@ -67,7 +67,7 @@ export class MovieCardComponent {
 
   addFavoriteMovie(id: string): void {
     this.fetchApiData.addFavoriteMovie(id).subscribe((resp: any) => {
-      console.log(resp);
+      //console.log(resp);
       let movie = this.movies.find((m: any) => m._id === id).Title;
       this.snackBar.open(
         `"${movie}" has been added to your favorites!`, 'OK', {
@@ -79,7 +79,7 @@ export class MovieCardComponent {
 
   deleteFavoriteMovie(id: string): void {
     this.fetchApiData.deleteFavoriteMovie(id).subscribe((resp: any) => {
-      console.log(resp);
+      //console.log(resp);
       let movie = this.movies.find((m: any) => m._id === id).Title;
       this.snackBar.open(
         `"${movie}" has been removed from your favorites!`, 'OK', {

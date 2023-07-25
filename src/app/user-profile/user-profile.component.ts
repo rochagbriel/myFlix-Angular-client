@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialogRef } from '@angular/material/dialog';
 import { formatDate } from '@angular/common';
 import { UserService } from '../user.service';
 
@@ -28,7 +27,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getUserInfo();
   }
-
+  // This is the function responsible for handling the form inputs to the backend
   updateDataHandler(obj: any): any {
     const newUserData: Record<string, any> = {};
     Object.keys(obj).forEach((key) => {
@@ -74,7 +73,7 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  deleteUser(): void {
+  deleteUserBtn(): void {
     if (confirm('Are you sure you want to delete your account?')) {
       this.router.navigate(['welcome']).then(() => {
         this.snackBar.open('Account deleted successfully!', 'OK', {
