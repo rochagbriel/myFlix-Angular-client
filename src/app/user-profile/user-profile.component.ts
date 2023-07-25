@@ -4,58 +4,62 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogRef } from '@angular/material/dialog';
 import { formatDate } from '@angular/common';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-
   user: any = {};
   favoriteMovies: any = [];
+  date: any = '';
 
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
   constructor(
+    private userService: UserService,
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getUserInfo();
   }
 
+  updateDataHandler(obj: any): any {
+    const newUserData: Record<string, any> = {};
+    Object.keys(obj).forEach((key) => {
+      if (obj[key] !== '') {
+        newUserData[key] = obj[key];
+      }
+    });
+    return newUserData;
+  }
+
   getUserInfo(): void {
     this.user = JSON.parse(localStorage.getItem('user')!);
-    const date = formatDate(this.user.Birthday, 'yyyy-MM-dd', 'en-US');
-    this.userData = {
-      Username: this.user.Username,
-      Password: this.user.Password,
-      Email: this.user.Email,
-      Birthday: date
-    };
+    this.date = formatDate(this.user.Birthday, 'yyyy-MM-dd', 'en-US');
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-    this.favoriteMovies = resp.filter((movie: any) => this.user.FavoriteMovies.includes(movie._id));
-    // console.log(this.favoriteMovies);
-  }
-  );
+      this.favoriteMovies = resp.filter((movie: any) =>
+        this.user.FavoriteMovies.includes(movie._id)
+      );
+      // console.log(this.favoriteMovies);
+    });
   }
 
   editUser(): void {
-    this.fetchApiData.editUserInfo(this.userData).subscribe((data) => {
-      localStorage.setItem('user', JSON.stringify(data));
-      localStorage.setItem('Username', data.Username);
-      // console.log(data);
-      this.snackBar.open('Profile updated successfully!', 'OK', {
-        duration: 2000
-      })
+    const newData = this.updateDataHandler(this.userData);
+    this.fetchApiData.editUserInfo(newData).subscribe((result) => {
+      // Logic for a successful user registration goes here!
+      // console.log(newData);
+      this.snackBar.open('Your data was successful updated', 'OK', {
+        duration: 2000,
+      });
+      this.userService.setUser(result);
       window.location.reload();
-    }, (result: any) => {
-      this.snackBar.open(result, 'OK', {
-        duration: 2000
-      })
     });
   }
 
@@ -63,24 +67,23 @@ export class UserProfileComponent implements OnInit {
     this.fetchApiData.deleteFavoriteMovie(id).subscribe((resp: any) => {
       // console.log(resp);
       this.snackBar.open('Movie removed from favorites!', 'OK', {
-        duration: 2000
+        duration: 2000,
       });
-      this.getUserInfo();
+      this.userService.setUser(resp);
+      window.location.reload();
     });
   }
 
   deleteUser(): void {
-   if (confirm('Are you sure you want to delete your account?')) {
-    this.router.navigate(['welcome']).then(() => {
-      this.snackBar.open('Account deleted successfully!', 'OK', {
-        duration: 2000
+    if (confirm('Are you sure you want to delete your account?')) {
+      this.router.navigate(['welcome']).then(() => {
+        this.snackBar.open('Account deleted successfully!', 'OK', {
+          duration: 2000,
+        });
+        this.fetchApiData.deleteUser().subscribe((resp: any) => {
+          localStorage.clear();
+        });
       });
-      this.fetchApiData.deleteUser().subscribe((resp: any) => {
-        localStorage.clear();
-      }
-      );
-    });
-  }
+    }
   }
 }
-

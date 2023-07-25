@@ -100,7 +100,19 @@ export class FetchApiDataService {
         Authorization: 'Bearer ' + token,
       }),
     }).pipe(
-      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
+  // Making the api call to delete a movie from a user's list of favorites
+  deleteFavoriteMovie(movieID: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const userID = localStorage.getItem('userID');
+    return this.http.delete(apiUrl + `users/${userID}/${movieID}`, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+      }),
+    }).pipe(
       catchError(this.handleError)
     );
   }
@@ -127,18 +139,6 @@ export class FetchApiDataService {
       }),
     }).pipe(
       map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-  }
-// Making the api call to delete a movie from a user's list of favorites
-  deleteFavoriteMovie(movieID: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const userID = localStorage.getItem('userID');
-    return this.http.delete(apiUrl + `users/${userID}/${movieID}`, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
-      }),
-    }).pipe(
       catchError(this.handleError)
     );
   }
