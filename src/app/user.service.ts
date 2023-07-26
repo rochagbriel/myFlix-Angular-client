@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
-
+/**
+ * This service will handle the user data
+ * @export
+ * @class UserService
+ * @method setUser
+ * @method getUser
+ * @returns {void}
+ * @param {object} user
+ */
 @Injectable({
   providedIn: 'root',
 })

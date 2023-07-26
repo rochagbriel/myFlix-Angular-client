@@ -1,6 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+/**
+ * This component will render the info card component
+ * @export
+ * @class InfoCardComponent
+ * @implements {OnInit}
+ * @param {string} title
+ * @param {string} description
+ */
+
 @Component({
   selector: 'app-info-card',
   templateUrl: './info-card.component.html',

@@ -24,6 +24,16 @@ export class MovieCardComponent {
     this.getMovies();
   }
 
+  /**
+   * Fetches all movies from the API
+   * @returns Array of movie objects
+   * @async
+   * @public
+   * @method getMovies
+   * @memberof MovieCardComponent
+   * @param none
+   * @returns {Array} movies
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -32,6 +42,14 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Opens a dialog with the genre's info
+   * @param {string} name
+   * @param {string} description
+   * @returns {void}
+   * @method getGenre
+   * @memberof MovieCardComponent
+   */
   getGenre(name: string, description: string): void {
     this.dialog.open(InfoCardComponent, {
       data: {
@@ -41,6 +59,13 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Opens a dialog with the director's info
+   * @param {string} name
+   * @param {string} bio
+   * @param {string} birth
+   * @returns {void}
+   */
   getDirector(name: string, bio: string, birth: string): void {
     this.dialog.open(InfoCardComponent, {
       data: {
@@ -50,6 +75,14 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Opens a dialog with the movie's description
+   * @param {string} title
+   * @param {string} description
+   * @returns {void}
+   * @method getMovieDescription
+   * @memberof MovieCardComponent
+   */
   getMovieDescription(title: string, description: string): void {
     this.dialog.open(InfoCardComponent, {
       data: {
@@ -58,13 +91,26 @@ export class MovieCardComponent {
       },
     });
   }
-
+  /**
+   * Checks if the movie is in the user's favorites
+   * @param {string} id
+   * @returns {boolean}
+   * @method isFavorite
+   * @memberof MovieCardComponent
+   */
   isFavorite(id: string): boolean {
     const user = localStorage.getItem('user');
     const favorites = JSON.parse(user!).FavoriteMovies;
     return favorites.includes(id);
   }
 
+  /**
+   * Adds a movie to the user's favorites
+   * @param {string} id
+   * @returns {void}
+   * @method addFavoriteMovie
+   * @memberof MovieCardComponent
+   */
   addFavoriteMovie(id: string): void {
     this.fetchApiData.addFavoriteMovie(id).subscribe((resp: any) => {
       //console.log(resp);
@@ -75,7 +121,13 @@ export class MovieCardComponent {
       this.userService.setUser(resp);
     });
   }
-
+  /**
+   * Removes a movie from the user's favorites
+   * @param {string} id
+   * @returns {void}
+   * @method deleteFavoriteMovie
+   * @memberof MovieCardComponent
+   * */
   deleteFavoriteMovie(id: string): void {
     this.fetchApiData.deleteFavoriteMovie(id).subscribe((resp: any) => {
       //console.log(resp);
